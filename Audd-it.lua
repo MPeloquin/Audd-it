@@ -1,5 +1,3 @@
-GearAuditor = LibStub("AceAddon-3.0"):NewAddon("GearAuditor")
-
 local items=
 {
 	[1] = { name = "HeadSlot", enchantable = false , align = "TOPRIGHT"},
@@ -51,7 +49,7 @@ end
 
 local gearWarnings = GearWarnings.New()
 
-function GearAuditor:OnEnable()	
+function On_Load()	
 	local auditor = Auditor.New()
 	local ui = AudditUi.New()
 	
@@ -67,6 +65,8 @@ Auditor.New = function()
 	
 	self.GemAuditor = GemAuditor.New()
 	self.EnchantAuditor = EnchantAuditor.New()
+	self.BeltBuckleAuditor = BeltBuckleAuditor.New()
+	
 	self.ProfessionAuditor = ProfessionAuditor.New()
 	self.JewelcraftingAuditor = JewelcraftingAuditor.New()
 	
@@ -154,6 +154,13 @@ EnchantAuditor.New = function()
 	return self
 end
 
+BeltBuckleAuditor = {}
+BeltBuckleAuditor.New = function()
+	local self = {}
+
+	return self
+end
+
 ProfessionAuditor = {}
 ProfessionAuditor.New = function()
 	local self = {}
@@ -223,7 +230,7 @@ end
 AudditUi = {}
 AudditUi.New = function()
 	local self = {}
-	self.itemFrame = ItemFrame.New()	
+	self.ItemFrame = ItemFrame.New()	
 	
 	self.Show = function()	
 		self.ShowItemsWarnings()
@@ -231,10 +238,10 @@ AudditUi.New = function()
 	
 	self.ShowItemsWarnings = function()
 		for itemId, itemInfo in pairs(items) do
-			frame = self.itemFrame.Create(itemInfo)
+			frame = self.ItemFrame.Create(itemInfo)
 
 			if ( gearWarnings.HasWarnings(itemId) ) then
-				self.itemFrame.ShowFrame(frame, itemId)				
+				self.ItemFrame.ShowFrame(frame, itemId)				
 			else
 				frame:Hide()
 			end
@@ -247,7 +254,7 @@ end
 ItemFrame = {}
 ItemFrame.New = function()
 	local self = {}
-	self.itemToolTip = ItemToolTip.New()
+	self.ItemToolTip = ItemToolTip.New()
 	
 	self.Create = function(itemInfo)
 		var = _G["Character" .. itemInfo.name]
@@ -268,10 +275,10 @@ ItemFrame.New = function()
 	self.ShowFrame = function(frame, itemId)
 		frame:Show()
 		frame:HookScript('OnEnter', function(frame)
-			self.itemToolTip.ShowToolTip(frame, itemId)
+			self.ItemToolTip.ShowToolTip(frame, itemId)
 		end)
 		frame:HookScript('OnLeave', function()
-			self.itemToolTip.HideToolTip()
+			self.ItemToolTip.HideToolTip()
 		end)
 	end	
 	return self
@@ -317,3 +324,5 @@ function tprint (tbl, indent)
     end
   end
 end
+
+On_Load()
