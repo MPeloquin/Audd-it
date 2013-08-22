@@ -1,22 +1,22 @@
 local incompleteItems = {}
 local items=
 {
-	[1] = { name = "headSlot", enchantable = false },
-	[2] = { name = "neckSlot", enchantable = false },
-	[3] = { name = "shoulderSlot", enchantable = true },	
-	[5] = { name = "chestSlot", enchantable = true },
-	[6] = { name = "waistSlot", enchantable = false },
-	[7] = { name = "legsSlot", enchantable = true },
-	[8] = { name = "feetSlot", enchantable = true },
-	[9] = { name = "wristSlot", enchantable = true },
-	[10] = { name = "handsSlot", enchantable = true },	
-	[11] = { name = "finger0Slot", enchantable = false },
-	[12] = { name = "finger1Slot", enchantable = false },
-	[13] = { name = "trinket0Slot", enchantable = false },
-	[14] = { name = "trinket1Slot", enchantable = false },
-	[15] = { name = "backSlot", enchantable = true },
-	[16] = { name = "mainHandSlot", enchantable = true },
-	[17] = { name = "secondaryHandSlot", enchantable = true },
+	[1] = { name = "HeadSlot", enchantable = false , align = "TOPRIGHT"},
+	[2] = { name = "NeckSlot", enchantable = false , align = "TOPRIGHT"},
+	[3] = { name = "ShoulderSlot", enchantable = true , align = "TOPRIGHT"},	
+	[5] = { name = "ChestSlot", enchantable = true , align = "TOPRIGHT"},
+	[6] = { name = "WaistSlot", enchantable = false , align = "TOPLEFT"},
+	[7] = { name = "LegsSlot", enchantable = true , align = "TOPLEFT"},
+	[8] = { name = "FeetSlot", enchantable = true , align = "TOPLEFT"},
+	[9] = { name = "WristSlot", enchantable = true , align = "TOPRIGHT"},
+	[10] = { name = "HandsSlot", enchantable = true , align = "TOPLEFT"},	
+	[11] = { name = "Finger0Slot", enchantable = false , align = "TOPLEFT"},
+	[12] = { name = "Finger1Slot", enchantable = false , align = "TOPLEFT"},
+	[13] = { name = "Trinket0Slot", enchantable = false , align = "TOPLEFT"},
+	[14] = { name = "Trinket1Slot", enchantable = false , align = "TOPLEFT"},
+	[15] = { name = "BackSlot", enchantable = true , align = "TOPRIGHT"},
+	[16] = { name = "MainHandSlot", enchantable = true , align = "TOPLEFT"},
+	[17] = { name = "SecondaryHandSlot", enchantable = true , align = "TOPLEFT"},
 }
 
 GearAuditor = LibStub("AceAddon-3.0"):NewAddon("GearAuditor", "AceConsole-3.0")
@@ -25,13 +25,30 @@ function GearAuditor:OnEnable()
 	local auditor = Auditor.New()
 	local jewelcraftingAuditor = JewelcraftingAuditor.New()
 	
-	for item, itemInfo in pairs(items) do
+	for itemId, itemInfo in pairs(items) do
 		auditor.AuditItem(itemInfo.name)
 	end
 	
 	auditor.AuditCharacter()
 
-	tprint(incompleteItems)
+	for itemId, itemInfo in pairs(items) do
+		var = _G["Character" .. itemInfo.name]
+		local f = CreateFrame("Frame",nil, var)
+		f:SetWidth(15) -- Set these to whatever height/width is needed 
+		f:SetHeight(15) -- for your Texture
+		f:SetPoint(itemInfo.align, (itemInfo.align == "TOPLEFT") and -10 or 10 ,8)
+
+		local t = f:CreateTexture(nil,"FOREGROUND")
+		t:SetTexture("Interface\\AddOns\\GearAuditor\\Textures\\warning.tga")
+		t:SetAllPoints(f)
+		f.texture = t
+		
+		if (#{incompleteItems[itemId]} > 0) then
+			f:Show()
+		else
+			f:Hide()
+		end
+	end
 end
 
 Auditor = {}
@@ -134,11 +151,10 @@ JewelcraftingAuditor = {}
 JewelcraftingAuditor.New = function()
 	local self = {}
 	
-	self.ProfessionsInspector = ProfessionsInspector.New()
 	self.JcGems = Set { 83151, 136274, 122675, 122676, 122674, 122685, 122684, 136270, 136275, 122683, 122682,136269, 122681, 122680, 122678, 122677, 122679, 136273, 136272 }
 	
 	self.Audit = function()	
-		if(not self.ProfessionsInspector.HasJewelCrafting()) then
+		if(not ProfessionsInspector.New().HasJewelCrafting()) then
 			return
 		end
 	
@@ -203,7 +219,7 @@ function Set (list)
   return set
 end
 
--- Remove prod || extract lib
+-- Extract lib
 function tprint (tbl, indent)
   if not indent then indent = 0 end
   for k, v in pairs(tbl) do
