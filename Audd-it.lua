@@ -54,39 +54,11 @@ local gearWarnings = GearWarnings.New()
 
 function GearAuditor:OnEnable()	
 	local auditor = Auditor.New()
-
+	local ui = AudditUi.New()
+	
 	auditor.Audit()
 
-	for itemId, itemInfo in pairs(items) do
-		var = _G["Character" .. itemInfo.name]
-		local f = CreateFrame("Frame",nil, var)
-		f:EnableMouse(true)
-		f:SetWidth(15)
-		f:SetHeight(15)
-		f:SetPoint(itemInfo.align, (itemInfo.align == "TOPLEFT") and -10 or 10 ,7)
-
-		local t = f:CreateTexture(nil,"FOREGROUND")
-		t:SetTexture("Interface\\AddOns\\Audd-it\\Textures\\warning.tga")
-		t:SetAllPoints(f)
-		f.texture = t
-
-		if ( gearWarnings.HasWarnings(itemId) ) then
-			f:Show()
-			f:HookScript('OnEnter', function(self, motion)
-				GameTooltip:SetOwner(self, "ANCHOR_CURSOR")
-
-				GameTooltip:SetText(gearWarnings.GetMessage(itemId))
-				GameTooltip:Show()
-			end)
-
-			f:HookScript('OnLeave', function(self, motion)
-				GameTooltip:Hide()
-			end)
-			
-		else
-			f:Hide()
-		end
-	end
+	ui.Show()
 end
  
 
@@ -245,6 +217,81 @@ ProfessionsInspector.New = function()
 		end
 		return false;
 	end	
+	
+	return self
+end
+
+AudditUi = {}
+AudditUi.New = function()
+	local self = {}
+	self.itemFrame = ItemFrame.New()	
+	
+	self.Show = function()	
+		self.ShowItemsWarnings()
+	end
+	
+	self.ShowItemsWarnings = function()
+		for itemId, itemInfo in pairs(items) do
+			frame = self.itemFrame.Create(itemInfo)
+
+			if ( gearWarnings.HasWarnings(itemId) ) then
+				self.itemFrame.ShowFrame(frame, itemId)				
+			else
+				frame:Hide()
+			end
+		end	
+	end	
+
+	return self
+end
+
+ItemFrame = {}
+ItemFrame.New = function()
+	local self = {}
+	self.itemToolTip = ItemToolTip.New()
+	
+	self.Create = function(itemInfo)
+		var = _G["Character" .. itemInfo.name]
+		local frame = CreateFrame("Frame",nil, var)
+		frame:EnableMouse(true)
+		frame:SetWidth(15)
+		frame:SetHeight(15)
+		frame:SetPoint(itemInfo.align, (itemInfo.align == "TOPLEFT") and -10 or 10 ,7)
+
+		local texture = frame:CreateTexture(nil,"FOREGROUND")
+		texture:SetTexture("Interface\\AddOns\\Audd-it\\Textures\\warning.tga")
+		texture:SetAllPoints(frame)
+		frame.texture = texture
+		
+		return frame
+	end
+	
+	self.ShowFrame = function(frame, itemId)
+		frame:Show()
+		frame:HookScript('OnEnter', function(frame)
+			self.itemToolTip.ShowToolTip(frame, itemId)
+		end)
+		frame:HookScript('OnLeave', function()
+			self.itemToolTip.HideToolTip()
+		end)
+	end	
+	return self
+end
+
+ItemToolTip = {}
+ItemToolTip.New = function()
+	local self = {}
+	
+	self.ShowToolTip = function(frame, itemId)
+		GameTooltip:SetOwner(frame, "ANCHOR_CURSOR")
+
+		GameTooltip:SetText(gearWarnings.GetMessage(itemId))
+		GameTooltip:Show()
+	end
+	
+	self.HideToolTip = function()
+		GameTooltip:Hide()	
+	end
 	
 	return self
 end
