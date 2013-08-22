@@ -36,7 +36,7 @@ function GearAuditor:OnEnable()
 		local f = CreateFrame("Frame",nil, var)
 		f:SetWidth(15) -- Set these to whatever height/width is needed 
 		f:SetHeight(15) -- for your Texture
-		f:SetPoint(itemInfo.align, (itemInfo.align == "TOPLEFT") and -10 or 10 ,8)
+		f:SetPoint(itemInfo.align, (itemInfo.align == "TOPLEFT") and -10 or 10 ,7)
 
 		local t = f:CreateTexture(nil,"FOREGROUND")
 		t:SetTexture("Interface\\AddOns\\GearAuditor\\Textures\\warning.tga")
