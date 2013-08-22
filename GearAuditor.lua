@@ -133,10 +133,11 @@ JewelcraftingAuditor = {}
 JewelcraftingAuditor.New = function()
 	local self = {}
 	
+	self.ProfessionsInspector = ProfessionsInspector.New()
 	self.JcGems = Set { 83151, 136274, 122675, 122676, 122674, 122685, 122684, 136270, 136275, 122683, 122682,136269, 122681, 122680, 122678, 122677, 122679, 136273, 136272 }
 	
 	self.Audit = function()	
-		if(not self.HasJewelCrafting()) then
+		if(not self.ProfessionsInspector.HasJewelCrafting()) then
 			return
 		end
 	
@@ -145,19 +146,6 @@ JewelcraftingAuditor.New = function()
 		if(jcGemsCount < 3) then
 			AddMessage(0, "Jewelcrafting: " .. 3 - jcGemsCount .. " unused Serpent's Eye")
 		end
-	end
-	
-	-- Extract class
-	self.HasJewelCrafting = function()	
-		prof1Id, prof2Id = GetProfessions()		
-		
-		prof1 = select(7, GetProfessionInfo(prof1Id))	
-		prof2 = select(7, GetProfessionInfo(prof2Id))
-		
-		if (prof1 == 755 or prof2 == 755) then
-			return true;
-		end
-		return false;
 	end	
 
 	self.CountJcGems = function()
@@ -177,6 +165,26 @@ JewelcraftingAuditor.New = function()
 	
 	return self
 end
+
+ProfessionsInspector = {}
+ProfessionsInspector.New = function()
+	local self = {}
+		
+	self.HasJewelCrafting = function()	
+		prof1Id, prof2Id = GetProfessions()		
+		
+		prof1 = select(7, GetProfessionInfo(prof1Id))	
+		prof2 = select(7, GetProfessionInfo(prof2Id))
+		
+		if (prof1 == 755 or prof2 == 755) then
+			return true;
+		end
+		return false;
+	end	
+	
+	return self
+end
+
 
 -- Extract class
 local incompleteItems = {}
