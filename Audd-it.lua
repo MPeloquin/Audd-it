@@ -1,3 +1,5 @@
+local Auddit = CreateFrame('Frame')
+
 local items=
 {
 	[1] = { name = "HeadSlot", enchantable = false , align = "TOPRIGHT"},
@@ -18,38 +20,12 @@ local items=
 	[17] = { name = "SecondaryHandSlot", enchantable = true , align = "TOPLEFT"},
 }
 
-GearWarnings = {}
-GearWarnings.New = function()
-	local self = {}
-	
-	self.incompleteItems = {}
-	
-	self.AddMessage = function(itemId, message)
-		if (self.incompleteItems[itemId] == nil) then
-			self.incompleteItems[itemId] = {}
-		end
-		
-		table.insert(self.incompleteItems[itemId], message)
-	end
-	
-	self.GetMessage = function(itemId)
-		text = ""
-		for _, message in pairs(self.incompleteItems[itemId]) do
-			text = text .. message .. "\n\n"
-		end
-		return string.sub(text, 0, -2)
-	end
-	
-	self.HasWarnings = function(itemId)
-		return #{self.incompleteItems[itemId]} > 0
-	end
-	
-	return self
-end
 
-local gearWarnings = GearWarnings.New()
+local gearWarnings = {}
 
-function On_Load()	
+function Auddit:Execute()	
+	gearWarnings = GearWarnings.New()
+	
 	local auditor = Auditor.New()
 	local ui = AudditUi.New()
 	
@@ -58,7 +34,6 @@ function On_Load()
 	ui.Show()
 end
  
-
 Auditor = {}
 Auditor.New = function()
 	local self = {}
@@ -71,6 +46,7 @@ Auditor.New = function()
 	self.JewelcraftingAuditor = JewelcraftingAuditor.New()
 	
 	self.Audit = function()
+		print(#items)
 		for itemId, itemInfo in pairs(items) do
 			self.AuditItem(itemInfo.name)
 		end
@@ -227,6 +203,35 @@ ProfessionsInspector.New = function()
 	return self
 end
 
+GearWarnings = {}
+GearWarnings.New = function()
+	local self = {}
+	
+	self.incompleteItems = {}
+	
+	self.AddMessage = function(itemId, message)
+		if (self.incompleteItems[itemId] == nil) then
+			self.incompleteItems[itemId] = {}
+		end
+		
+		table.insert(self.incompleteItems[itemId], message)
+	end
+	
+	self.GetMessage = function(itemId)
+		text = ""
+		for _, message in pairs(self.incompleteItems[itemId]) do
+			text = text .. message .. "\n\n"
+		end
+		return string.sub(text, 0, -2)
+	end
+	
+	self.HasWarnings = function(itemId)
+		return #{self.incompleteItems[itemId]} > 0
+	end
+	
+	return self
+end
+
 AudditUi = {}
 AudditUi.New = function()
 	local self = {}
@@ -325,4 +330,6 @@ function tprint (tbl, indent)
   end
 end
 
-On_Load()
+Auddit:SetScript('OnEvent', Auddit.Execute)
+Auddit:RegisterEvent('PLAYER_ENTERING_WORLD')
+Auddit:RegisterEvent('PLAYER_EQUIPMENT_CHANGED')
