@@ -1,8 +1,8 @@
 ## Interface: 50300
-## Title: GearAuditor
+## Title: Audd-it
 ## Author: Auddax
 ## Notes: Adds the amory auditor to the in game character sheet
 
 Libs.xml
 
-GearAuditor.lua
+Audd-it.lua

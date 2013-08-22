@@ -1,4 +1,5 @@
-local incompleteItems = {}
+GearAuditor = LibStub("AceAddon-3.0"):NewAddon("GearAuditor", "AceConsole-3.0")
+
 local items=
 {
 	[1] = { name = "HeadSlot", enchantable = false , align = "TOPRIGHT"},
@@ -19,37 +20,75 @@ local items=
 	[17] = { name = "SecondaryHandSlot", enchantable = true , align = "TOPLEFT"},
 }
 
-GearAuditor = LibStub("AceAddon-3.0"):NewAddon("GearAuditor", "AceConsole-3.0")
+GearWarnings = {}
+GearWarnings.New = function()
+	local self = {}
+	
+	self.incompleteItems = {}
+	
+	self.AddMessage = function(itemId, message)
+		if (self.incompleteItems[itemId] == nil) then
+			self.incompleteItems[itemId] = {}
+		end
+		
+		table.insert(self.incompleteItems[itemId], message)
+	end
+	
+	self.GetMessage = function(itemId)
+		text = ""
+		for _, message in pairs(self.incompleteItems[itemId]) do
+			text = text .. message .. "\n\n"
+		end
+		return string.sub(text, 0, -2)
+	end
+	
+	self.HasWarnings = function(itemId)
+		return #{self.incompleteItems[itemId]} > 0
+	end
+	
+	return self
+end
+
+local gearWarnings = GearWarnings.New()
+
 
 function GearAuditor:OnEnable()	
 	local auditor = Auditor.New()
-	local jewelcraftingAuditor = JewelcraftingAuditor.New()
-	
-	for itemId, itemInfo in pairs(items) do
-		auditor.AuditItem(itemInfo.name)
-	end
-	
-	auditor.AuditCharacter()
+
+	auditor.Audit()
 
 	for itemId, itemInfo in pairs(items) do
 		var = _G["Character" .. itemInfo.name]
 		local f = CreateFrame("Frame",nil, var)
-		f:SetWidth(15) -- Set these to whatever height/width is needed 
-		f:SetHeight(15) -- for your Texture
+		f:EnableMouse(true)
+		f:SetWidth(15)
+		f:SetHeight(15)
 		f:SetPoint(itemInfo.align, (itemInfo.align == "TOPLEFT") and -10 or 10 ,7)
 
 		local t = f:CreateTexture(nil,"FOREGROUND")
-		t:SetTexture("Interface\\AddOns\\GearAuditor\\Textures\\warning.tga")
+		t:SetTexture("Interface\\AddOns\\Audd-it\\Textures\\warning.tga")
 		t:SetAllPoints(f)
 		f.texture = t
-		
-		if (#{incompleteItems[itemId]} > 0) then
+
+		if ( gearWarnings.HasWarnings(itemId) ) then
 			f:Show()
+			f:HookScript('OnEnter', function(self, motion)
+				GameTooltip:SetOwner(self, "ANCHOR_CURSOR")
+
+				GameTooltip:SetText(gearWarnings.GetMessage(itemId))
+				GameTooltip:Show()
+			end)
+
+			f:HookScript('OnLeave', function(self, motion)
+				GameTooltip:Hide()
+			end)
+			
 		else
 			f:Hide()
 		end
 	end
 end
+ 
 
 Auditor = {}
 Auditor.New = function()
@@ -59,6 +98,14 @@ Auditor.New = function()
 	self.EnchantAuditor = EnchantAuditor.New()
 	self.ProfessionAuditor = ProfessionAuditor.New()
 	self.JewelcraftingAuditor = JewelcraftingAuditor.New()
+	
+	self.Audit = function()
+		for itemId, itemInfo in pairs(items) do
+			self.AuditItem(itemInfo.name)
+		end
+	
+		self.AuditCharacter()
+	end
 	
 	self.AuditItem = function(item)
 		local itemId = GetInventorySlotInfo(item)
@@ -86,7 +133,7 @@ GemAuditor.New = function()
 		emptySockets = socketsNumber - gemsNumber
 		if (emptySockets > 0) then
 			message = (emptySockets == 1) and "1 empty socket" or emptySockets .. " empty sockets"
-			AddMessage(itemId, message)
+			gearWarnings.AddMessage(itemId, message)
 		end	
 	end	
 
@@ -123,7 +170,7 @@ EnchantAuditor.New = function()
 		local itemLink = GetInventoryItemLink("player", itemId) or -1		
 
 		if (self.GetEnchantId(itemLink) == 0) then
-			AddMessage(itemId, "Unenchanted")			
+			gearWarnings.AddMessage(itemId, "Unenchanted")			
 		end		
 	end
 	
@@ -161,7 +208,7 @@ JewelcraftingAuditor.New = function()
 		jcGemsCount = self.CountJcGems();	
 		
 		if(jcGemsCount < 3) then
-			AddMessage(0, "Jewelcrafting: " .. 3 - jcGemsCount .. " unused Serpent's Eye")
+			gearWarnings.AddMessage(0, "Jewelcrafting: " .. 3 - jcGemsCount .. " unused Serpent's Eye")
 		end
 	end	
 
@@ -202,15 +249,6 @@ ProfessionsInspector.New = function()
 	return self
 end
 
-
--- Extract class
-function AddMessage(itemId, message)
-	if (incompleteItems[itemId] == nil) then
-		incompleteItems[itemId] = {}
-	end
-	
-	table.insert(incompleteItems[itemId], message)
-end
 
 -- Extract lib
 function Set (list)
