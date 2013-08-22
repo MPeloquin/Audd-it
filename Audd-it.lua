@@ -1,4 +1,4 @@
-GearAuditor = LibStub("AceAddon-3.0"):NewAddon("GearAuditor", "AceConsole-3.0")
+GearAuditor = LibStub("AceAddon-3.0"):NewAddon("GearAuditor")
 
 local items=
 {
@@ -50,7 +50,6 @@ GearWarnings.New = function()
 end
 
 local gearWarnings = GearWarnings.New()
-
 
 function GearAuditor:OnEnable()	
 	local auditor = Auditor.New()
@@ -295,6 +294,7 @@ ItemToolTip.New = function()
 	
 	return self
 end
+
 
 
 -- Extract lib
