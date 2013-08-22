@@ -1,3 +1,4 @@
+local incompleteItems = {}
 local items=
 {
 	[1] = { name = "headSlot", enchantable = false },
@@ -187,7 +188,6 @@ end
 
 
 -- Extract class
-local incompleteItems = {}
 function AddMessage(itemId, message)
 	if (incompleteItems[itemId] == nil) then
 		incompleteItems[itemId] = {}
