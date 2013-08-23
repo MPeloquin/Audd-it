@@ -17,9 +17,11 @@ Auditor\Profession\ProfessionInspector.lua
 Auditor\Profession\JewelCraftingAuditor.lua
 Auditor\Profession\ProfessionAuditor.lua
 
+UI\Frames.lua
 UI\ItemToolTip.lua
 UI\ItemFrame.lua
 UI\AudditUi.lua
+
 
 Auditor\Auditor.lua
 Audd-it.lua

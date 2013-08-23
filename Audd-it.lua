@@ -5,9 +5,11 @@ function Auddit:Execute()
 	
 	local auditor = Auditor.New()
 	local ui = AudditUi.New()
-	
+  
 	auditor.Audit()
-
+  
+  
+  ui.CreateIfNeeded()
 	ui.Show()
 end 
 

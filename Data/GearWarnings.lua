@@ -1,4 +1,3 @@
-print("whatsup fgats")
 GearWarnings = {}
 GearWarnings.New = function()
 	local self = {}

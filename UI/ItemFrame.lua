@@ -1,3 +1,5 @@
+frames = {}
+
 ItemFrame = {}
 ItemFrame.New = function()
 	local self = {}
@@ -28,5 +30,10 @@ ItemFrame.New = function()
 			self.ItemToolTip.HideToolTip()
 		end)
 	end	
+  
+  self.HideFrame = function(frame)
+    frame:Hide()
+  end
+  
 	return self
 end
