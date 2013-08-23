@@ -3,6 +3,23 @@
 ## Author: Auddax
 ## Notes: Adds the amory auditor to the in game character sheet
 
-Libs.xml
+Debug\TablePrint.lua
 
+Data\Set.lua
+Data\Items.lua
+Data\GearWarnings.lua
+
+Auditor\GemAuditor.lua
+Auditor\EnchantAuditor.lua
+Auditor\BeltBuckleAuditor.lua
+
+Auditor\Profession\ProfessionInspector.lua
+Auditor\Profession\JewelCraftingAuditor.lua
+Auditor\Profession\ProfessionAuditor.lua
+
+UI\ItemToolTip.lua
+UI\ItemFrame.lua
+UI\AudditUi.lua
+
+Auditor\Auditor.lua
 Audd-it.lua
