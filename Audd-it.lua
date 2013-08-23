@@ -6,13 +6,12 @@ function Auddit:Execute()
 	local auditor = Auditor.New()
 	local ui = AudditUi.New()
   
-	auditor.Audit()
-  
+	auditor.Audit()  
   
   ui.CreateIfNeeded()
 	ui.Show()
 end 
 
 Auddit:SetScript('OnEvent', Auddit.Execute)
-Auddit:RegisterEvent('PLAYER_ENTERING_WORLD')
-Auddit:RegisterEvent('PLAYER_EQUIPMENT_CHANGED')
+Auddit:RegisterEvent('PLAYER_LOGIN')
+Auddit:RegisterEvent('UNIT_INVENTORY_CHANGED')
