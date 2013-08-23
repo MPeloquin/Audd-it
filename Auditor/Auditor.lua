@@ -7,7 +7,6 @@ Auditor.New = function()
 	self.BeltBuckleAuditor = BeltBuckleAuditor.New()
 	
 	self.ProfessionAuditor = ProfessionAuditor.New()
-	self.JewelcraftingAuditor = JewelcraftingAuditor.New()
 	
 	self.Audit = function()
 		for itemId, itemInfo in pairs(items) do
@@ -22,11 +21,11 @@ Auditor.New = function()
 		
 		self.GemAuditor.Audit(itemId)		
 		self.EnchantAuditor.Audit(itemId)
-		self.ProfessionAuditor.Audit(itemId)
+		
 	end
 	
 	self.AuditCharacter = function()
-		self.JewelcraftingAuditor.Audit()
+    self.ProfessionAuditor.Audit()
 	end
 	
 	return self

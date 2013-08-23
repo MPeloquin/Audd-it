@@ -2,8 +2,10 @@ ProfessionAuditor = {}
 ProfessionAuditor.New = function()
 	local self = {}
 	
-	self.Audit = function(itemId)
-		
+  self.JewelcraftingAuditor = JewelcraftingAuditor.New()
+  
+	self.Audit = function()
+      self.JewelcraftingAuditor.Audit()
 	end
 	
 	return self
