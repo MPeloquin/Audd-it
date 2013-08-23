@@ -4,8 +4,7 @@ ItemToolTip.New = function()
 	
 	self.ShowToolTip = function(frame, itemId)
 		GameTooltip:SetOwner(frame, "ANCHOR_CURSOR")
-
-		GameTooltip:SetText(gearWarnings.GetMessage(itemId))
+		GameTooltip:SetText(gearWarnings.GetWarning(itemId))
 		GameTooltip:Show()
 	end
 	

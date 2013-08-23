@@ -8,9 +8,11 @@ Auditor.New = function()
 	
 	self.ProfessionAuditor = ProfessionAuditor.New()
 	
+  -- TODO Add all the remaining auditors
+  
 	self.Audit = function()
 		for itemId, itemInfo in pairs(items) do
-			self.AuditItem(itemInfo.name)
+        self.AuditItem(itemInfo.name)
 		end
 	
 		self.AuditCharacter()
@@ -18,10 +20,14 @@ Auditor.New = function()
 	
 	self.AuditItem = function(item)
 		local itemId = GetInventorySlotInfo(item)
-		
-		self.GemAuditor.Audit(itemId)		
-		self.EnchantAuditor.Audit(itemId)
-		
+    
+    if ((item == "WaistSlot")) then
+      self.BeltBuckleAuditor.Audit()
+    else
+      self.GemAuditor.Audit(itemId)		
+    end
+    
+		self.EnchantAuditor.Audit(itemId)    		
 	end
 	
 	self.AuditCharacter = function()

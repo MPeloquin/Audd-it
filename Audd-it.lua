@@ -15,3 +15,4 @@ end
 Auddit:SetScript('OnEvent', Auddit.Execute)
 Auddit:RegisterEvent('PLAYER_LOGIN')
 Auddit:RegisterEvent('UNIT_INVENTORY_CHANGED')
+--TODO Add event trade completed for enchants via trade

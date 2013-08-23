@@ -11,8 +11,8 @@ JewelcraftingAuditor.New = function()
 	
 		jcGemsCount = self.CountJcGems();	
 		
-		if(jcGemsCount < 3) then
-			gearWarnings.AddMessage(0, "Jewelcrafting: " .. 3 - jcGemsCount .. " unused Serpent's Eye")
+		if(jcGemsCount < 2) then
+			gearWarnings.AddWarning(0, "Jewelcrafting: " .. 2 - jcGemsCount .. " unused Serpent's Eye")
 		end
 	end	
 
@@ -21,8 +21,8 @@ JewelcraftingAuditor.New = function()
 		
 		for item, itemInfo in pairs(items) do
 			gems = {GetInventoryItemGems(item)}
-			for key, value in pairs(gems) do
-				if (self.JcGems[value]) then
+			for key, gemId in pairs(gems) do
+				if (self.JcGems[gemId]) then
 					jcGemsCount = jcGemsCount + 1
 				end				
 			end			

@@ -6,11 +6,7 @@ GemAuditor.New = function()
 		socketsNumber = self.CountSockets(itemId)
 		gemsNumber = self.CountGems(itemId)
 		
-		emptySockets = socketsNumber - gemsNumber
-		if (emptySockets > 0) then
-			message = (emptySockets == 1) and "1 empty socket" or emptySockets .. " empty sockets"
-			gearWarnings.AddMessage(itemId, message)
-		end	
+    self.AddGemWarning(itemId, gemsNumber, socketsNumber)
 	end	
 
 	self.CountSockets = function(itemId)
@@ -19,9 +15,9 @@ GemAuditor.New = function()
 		
 		local stats = GetItemStats(itemLink) or {0}
 				
-		for key,value in pairs(stats) do
-			if (string.find(key, "EMPTY")) then
-				socketsNumber = socketsNumber + value
+		for info, number in pairs(stats) do
+			if (string.find(info, "EMPTY")) then
+				socketsNumber = socketsNumber + number
 			end
 		end
 				
@@ -29,8 +25,17 @@ GemAuditor.New = function()
 	end
 	
 	self.CountGems = function(itemId)
-		return #{GetInventoryItemGems(itemId)}		 
+    return TableSize({GetInventoryItemGems(itemId)})
 	end
+  
+  self.AddGemWarning = function(itemId, gemsNumber, socketsNumber)
+    emptySockets = socketsNumber - gemsNumber
+    
+		if (emptySockets > 0) then
+			message = (emptySockets == 1) and "1 empty socket" or emptySockets .. " empty sockets"
+			gearWarnings.AddWarning(itemId, message)
+		end	
+  end
 	
 	return self
 end

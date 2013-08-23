@@ -5,7 +5,9 @@
 
 Debug\TablePrint.lua
 
-Data\Set.lua
+DataStructures\Set.lua
+DataStructures\TableSize.lua
+
 Data\Items.lua
 Data\GearWarnings.lua
 

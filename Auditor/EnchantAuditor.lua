@@ -9,7 +9,7 @@ EnchantAuditor.New = function()
 		local itemLink = GetInventoryItemLink("player", itemId) or -1		
 
 		if (self.GetEnchantId(itemLink) == 0) then
-			gearWarnings.AddMessage(itemId, "Unenchanted")			
+			gearWarnings.AddWarning(itemId, "Unenchanted")			
 		end		
 	end
 	

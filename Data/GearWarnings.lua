@@ -2,26 +2,26 @@ GearWarnings = {}
 GearWarnings.New = function()
 	local self = {}
 	
-	self.incompleteItems = {}
+	self.warnings = {}
 	
-	self.AddMessage = function(itemId, message)
-		if (self.incompleteItems[itemId] == nil) then
-			self.incompleteItems[itemId] = {}
+	self.AddWarning = function(itemId, message)
+		if (self.warnings[itemId] == nil) then
+			self.warnings[itemId] = {}
 		end
 		
-		table.insert(self.incompleteItems[itemId], message)
+		table.insert(self.warnings[itemId], message)
 	end
 	
-	self.GetMessage = function(itemId)
+	self.GetWarning = function(itemId)
 		text = ""
-		for _, message in pairs(self.incompleteItems[itemId]) do
+		for _, message in pairs(self.warnings[itemId]) do
 			text = text .. message .. "\n\n"
 		end
 		return string.sub(text, 0, -2)
 	end
 	
 	self.HasWarnings = function(itemId)
-		return #{self.incompleteItems[itemId]} > 0
+		return #{self.warnings[itemId]} > 0
 	end
 	
 	return self
