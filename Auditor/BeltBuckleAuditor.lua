@@ -7,6 +7,10 @@ BeltBuckleAuditor.New = function()
   self.Audit = function()
     local itemId = GetInventorySlotInfo("WaistSlot")
     
+    if(GetInventoryItemLink("player", itemId) == nil) then
+      return
+    end
+    
     gemsNumber = self.GemAuditor.CountGems(itemId)
     socketsNumber = self.GemAuditor.CountSockets(itemId)
 

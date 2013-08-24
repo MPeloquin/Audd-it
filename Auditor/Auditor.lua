@@ -20,7 +20,7 @@ Auditor.New = function()
 	
 	self.AuditItem = function(item)
 		local itemId = GetInventorySlotInfo(item)
-    
+  
     if ((item == "WaistSlot")) then
       self.BeltBuckleAuditor.Audit()
     else
