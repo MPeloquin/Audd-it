@@ -23,10 +23,10 @@ ItemFrame.New = function()
 	
 	self.ShowFrame = function(frame, itemId)
 		frame:Show()
-		frame:HookScript('OnEnter', function(frame)
+		frame:SetScript('OnEnter', function(frame)
 			self.ItemToolTip.ShowToolTip(frame, itemId)
 		end)
-		frame:HookScript('OnLeave', function()
+		frame:SetScript('OnLeave', function()
 			self.ItemToolTip.HideToolTip()
 		end)
 	end	
