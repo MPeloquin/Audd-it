@@ -8,6 +8,7 @@ ProfessionAuditor.New = function()
   self.InscriptionAuditor = InscriptionAuditor.New()
   self.TailoringAuditor = TailoringAuditor.New()
   self.EnchantingAuditor = EnchantingAuditor.New()
+  self.EngineeringAuditor = EngineeringAuditor.New()
   
 	self.Audit = function()
       self.JewelcraftingAuditor.Audit()
@@ -16,6 +17,7 @@ ProfessionAuditor.New = function()
       self.InscriptionAuditor.Audit()
       self.TailoringAuditor.Audit()
       self.EnchantingAuditor.Audit()
+      self.EngineeringAuditor.Audit()
 	end
 	
 	return self

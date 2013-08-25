@@ -38,6 +38,10 @@ ProfessionInspector.New = function()
   
   self.GetEnchantingLevel = function()
     return self.GetProfessionLevel(333)
+  end   
+  
+  self.GetEngineeringLevel = function()
+    return self.GetProfessionLevel(202)
   end 
 	
 	return self

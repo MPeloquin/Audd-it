@@ -33,8 +33,8 @@ GearWarnings.New = function()
       return
     end
     
-    for id, message in pairs(self.warnings[itemId]) do
-			if (string.find(message, message)) then
+    for id, warningMessage in pairs(self.warnings[itemId]) do
+			if (string.find(warningMessage, message)) then
         self.warnings[itemId][id] = nil
       end
 		end

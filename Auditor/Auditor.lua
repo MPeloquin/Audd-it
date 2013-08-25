@@ -21,8 +21,8 @@ Auditor.New = function()
 	self.AuditItem = function(item)
 		local itemId = GetInventorySlotInfo(item)
     
+    self.EnchantAuditor.Audit(itemId) 
     self.GemAuditor.Audit(itemId)	    
-		self.EnchantAuditor.Audit(itemId)    		
 	end
 	
 	self.AuditCharacter = function()
