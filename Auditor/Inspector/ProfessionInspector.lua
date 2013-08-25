@@ -7,7 +7,6 @@ ProfessionInspector.New = function()
     
 		prof1 = select(7, GetProfessionInfo(prof1Id or -1))
 		prof2 = select(7, GetProfessionInfo(prof2Id or -1))
-		
     
 		if (prof1 == professionId or prof2 == professionId) then
 			return true;
@@ -21,6 +20,10 @@ ProfessionInspector.New = function()
   
   self.HasBlackSmithing = function()
     return self.HasProfession(164)
+  end  
+  
+  self.HasLeatherWorking = function()
+    return self.HasProfession(165)
   end
 	
 	return self

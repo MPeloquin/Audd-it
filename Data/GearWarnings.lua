@@ -21,15 +21,27 @@ GearWarnings.New = function()
 	end
 	
   self.RemoveGemWarning = function(itemId)
+    self.RemoveWarningWithMessage(itemId, "socket")
+  end  
+  
+  self.RemoveEnchantWarning = function(itemId)
+    self.RemoveWarningWithMessage(itemId, "Unenchanted")
+  end
+
+  self.RemoveWarningWithMessage = function(itemId, message)
     if (self.warnings[itemId] == nil) then
       return
     end
     
     for id, message in pairs(self.warnings[itemId]) do
-			if (string.find(message, "socket")) then
+			if (string.find(message, message)) then
         self.warnings[itemId][id] = nil
       end
 		end
+    
+    if (TableSize(self.warnings[itemId]) == 0) then
+      self.warnings[itemId] = nil
+    end
   end
   
 	self.HasWarnings = function(itemId)

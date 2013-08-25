@@ -4,10 +4,12 @@ ProfessionAuditor.New = function()
 	
   self.JewelcraftingAuditor = JewelcraftingAuditor.New()
   self.BlacksmithingAuditor = BlacksmithingAuditor.New()
+  self.LeatherworkingAuditor = LeatherworkingAuditor.New()
   
 	self.Audit = function()
       self.JewelcraftingAuditor.Audit()
       self.BlacksmithingAuditor.Audit()
+      self.LeatherworkingAuditor.Audit()
 	end
 	
 	return self

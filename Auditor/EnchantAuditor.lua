@@ -1,6 +1,7 @@
 EnchantAuditor = {}
 EnchantAuditor.New = function()
 	local self = {}
+  
 	self.Audit = function(itemId)
 		if(not items[itemId].enchantable) then
 			return
