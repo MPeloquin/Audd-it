@@ -4,9 +4,9 @@ TailoringAuditor.New = function()
   
   self.ExtraEnchantAuditor = ExtraEnchantAuditor.New()
   
-  self.TailoringEnchants = Set { 3730, 3728, 3722 }
-  self.TailoringEnchants = Set { 4118, 4116, 4115 }
-  self.TailoringEnchants = Set { 4892, 4893, 4894 }
+  self.TailoringEnchants420 = Set { 3730, 3728, 3722 }
+  self.TailoringEnchants500 = Set { 4118, 4116, 4115 }
+  self.TailoringEnchants550 = Set { 4892, 4893, 4894 }
   
   self.Audit = function()
     if(not ProfessionInspector.New().HasTailoring()) then

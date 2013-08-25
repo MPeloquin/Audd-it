@@ -24,6 +24,7 @@ Auditor\Profession\BlacksmithingAuditor.lua
 Auditor\Profession\LeatherworkingAuditor.lua
 Auditor\Profession\InscriptionAuditor.lua
 Auditor\Profession\TailoringAuditor.lua
+Auditor\Profession\EnchantingAuditor.lua
 Auditor\Profession\ProfessionAuditor.lua
 
 UI\Frames.lua

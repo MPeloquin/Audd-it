@@ -32,6 +32,10 @@ ProfessionInspector.New = function()
   
   self.HasTailoring = function()
     return self.HasProfession(197)
+  end  
+  
+  self.HasEnchanting = function()
+    return self.HasProfession(333)
   end
 	
 	return self
