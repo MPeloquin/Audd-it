@@ -15,8 +15,18 @@ EnchantingAuditor.New = function()
 			return
 		end
     
-    self.ExtraEnchantAuditor.Audit("Finger0Slot", self.RingEnchants550, "Enchanting: Missing enchant")
-    self.ExtraEnchantAuditor.Audit("Finger1Slot", self.RingEnchants550, "Enchanting: Missing enchant")
+    local tableToUse = {}
+    if (enchantingLevel >= 400 and enchantingLevel < 475) then
+      tableToUse = self.RingEnchants400
+    elseif(enchantingLevel < 550) then
+      tableToUse = self.RingEnchants475
+    else
+      tableToUse = self.RingEnchants550
+    end
+    
+    
+    self.ExtraEnchantAuditor.Audit("Finger0Slot", tableToUse, "Enchanting: Missing enchant")
+    self.ExtraEnchantAuditor.Audit("Finger1Slot", tableToUse, "Enchanting: Missing enchant")
   end
   
   return self
