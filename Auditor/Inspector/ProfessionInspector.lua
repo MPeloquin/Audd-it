@@ -24,6 +24,10 @@ ProfessionInspector.New = function()
   
   self.HasLeatherWorking = function()
     return self.HasProfession(165)
+  end  
+  
+  self.HasInscription = function()
+    return self.HasProfession(773)
   end
 	
 	return self

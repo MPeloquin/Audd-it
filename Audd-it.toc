@@ -21,6 +21,7 @@ Auditor\ExtraGemAuditor.lua
 Auditor\Profession\JewelCraftingAuditor.lua
 Auditor\Profession\BlacksmithingAuditor.lua
 Auditor\Profession\LeatherworkingAuditor.lua
+Auditor\Profession\InscriptionAuditor.lua
 Auditor\Profession\ProfessionAuditor.lua
 
 UI\Frames.lua
