@@ -5,7 +5,9 @@ JewelcraftingAuditor.New = function()
 	self.JcGems = Set { 83151, 136274, 122675, 122676, 122674, 122685, 122684, 136270, 136275, 122683, 122682,136269, 122681, 122680, 122678, 122677, 122679, 136273, 136272 }
 	
 	self.Audit = function()	
-		if(not ProfessionInspector.New().HasJewelCrafting()) then
+    local jewelCraftingLevel = ProfessionInspector.New().GetJewelCraftingLevel()
+    
+		if(jewelCraftingLevel == -1) then
 			return
 		end
 	

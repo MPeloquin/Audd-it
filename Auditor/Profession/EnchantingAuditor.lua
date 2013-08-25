@@ -9,7 +9,9 @@ EnchantingAuditor.New = function()
   self.RingEnchants550 = Set { 4359, 4360, 4361, 4807 }
   
   self.Audit = function()
-    if(not ProfessionInspector.New().HasEnchanting()) then
+    local enchantingLevel = ProfessionInspector.New().GetEnchantingLevel()
+    
+    if(enchantingLevel == -1) then
 			return
 		end
     

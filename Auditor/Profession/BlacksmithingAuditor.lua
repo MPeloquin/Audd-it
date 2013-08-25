@@ -5,7 +5,9 @@ BlacksmithingAuditor.New = function()
   self.ExtraGemAuditor = ExtraGemAuditor.New()
   
   self.Audit = function()
-    if(not ProfessionInspector.New().HasBlackSmithing()) then
+    local blacksmithingLevel = ProfessionInspector.New().GetBlackSmithingLevel()
+    
+    if(blacksmithingLevel == -1) then
 			return
 		end    
        

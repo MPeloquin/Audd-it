@@ -7,7 +7,9 @@ InscriptionAuditor.New = function()
   self.InscriptionEnchants = Set { 4912, 4913, 4914, 4915 }
   
   self.Audit = function()
-    if(not ProfessionInspector.New().HasInscription()) then
+    local inscriptionLevel = ProfessionInspector.New().GetInscriptionLevel()
+    
+    if(inscriptionLevel == -1) then
 			return
 		end
     

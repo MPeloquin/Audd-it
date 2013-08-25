@@ -9,7 +9,9 @@ TailoringAuditor.New = function()
   self.TailoringEnchants550 = Set { 4892, 4893, 4894 }
   
   self.Audit = function()
-    if(not ProfessionInspector.New().HasTailoring()) then
+    local tailoringLevel = ProfessionInspector.New().GetTailoringLevel()
+
+    if(tailoringLevel == -1) then
 			return
 		end
     

@@ -2,41 +2,43 @@ ProfessionInspector = {}
 ProfessionInspector.New = function()
 	local self = {}
 	
-  self.HasProfession = function(professionId)
+  self.GetProfessionLevel = function(professionId)
     prof1Id, prof2Id = GetProfessions()		
     
-		prof1 = select(7, GetProfessionInfo(prof1Id or -1))
-		prof2 = select(7, GetProfessionInfo(prof2Id or -1))
-    
-		if (prof1 == professionId or prof2 == professionId) then
-			return true;
+    _,_,prof1level, _, _, _, prof1 = GetProfessionInfo(prof1Id or -1)
+    _,_,prof2level, _, _, _, prof2 = GetProfessionInfo(prof2Id or -1)
+
+    if (prof1 == professionId) then
+			return prof1level
+    elseif (prof2 == professionId) then
+      return prof2level
 		end
-		return false;       
+		return -1;
   end
   
-	self.HasJewelCrafting = function()	
-    return self.HasProfession(755)
+	self.GetJewelCraftingLevel = function()	
+    return self.GetProfessionLevel(755)
 	end	
   
-  self.HasBlackSmithing = function()
-    return self.HasProfession(164)
+  self.GetBlackSmithingLevel = function()
+    return self.GetProfessionLevel(164)
   end  
   
-  self.HasLeatherWorking = function()
-    return self.HasProfession(165)
+  self.GetLeatherWorkingLevel = function()
+    return self.GetProfessionLevel(165)
   end  
   
-  self.HasInscription = function()
-    return self.HasProfession(773)
+  self.GetInscriptionLevel = function()
+    return self.GetProfessionLevel(773)
   end  
   
-  self.HasTailoring = function()
-    return self.HasProfession(197)
+  self.GetTailoringLevel = function()
+    return self.GetProfessionLevel(197)
   end  
   
-  self.HasEnchanting = function()
-    return self.HasProfession(333)
-  end
+  self.GetEnchantingLevel = function()
+    return self.GetProfessionLevel(333)
+  end 
 	
 	return self
 end

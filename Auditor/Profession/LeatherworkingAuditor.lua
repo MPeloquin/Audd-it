@@ -9,7 +9,9 @@ LeatherworkingAuditor.New = function()
   self.LwEnchants575 = Set { 4875, 4877, 4878, 4879 }
   
   self.Audit = function()
-    if(not ProfessionInspector.New().HasLeatherWorking()) then
+    local leatherWorkingLevel = ProfessionInspector.New().GetLeatherWorkingLevel()    
+    
+    if(leatherWorkingLevel == -1) then
 			return
 		end
     
