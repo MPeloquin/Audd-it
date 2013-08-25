@@ -28,6 +28,10 @@ ProfessionInspector.New = function()
   
   self.HasInscription = function()
     return self.HasProfession(773)
+  end  
+  
+  self.HasTailoring = function()
+    return self.HasProfession(197)
   end
 	
 	return self
