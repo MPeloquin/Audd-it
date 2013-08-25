@@ -20,10 +20,22 @@ GearWarnings.New = function()
 		return string.sub(text, 0, -2)
 	end
 	
+  self.RemoveGemWarning = function(itemId)
+    if (self.warnings[itemId] == nil) then
+      return
+    end
+    
+    for id, message in pairs(self.warnings[itemId]) do
+			if (string.find(message, "socket")) then
+        self.warnings[itemId][id] = nil
+      end
+		end
+  end
+  
 	self.HasWarnings = function(itemId)
 		return #{self.warnings[itemId]} > 0
-	end
-	
+	end	
+  
 	return self
 end
 

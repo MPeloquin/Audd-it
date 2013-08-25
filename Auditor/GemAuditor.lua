@@ -16,7 +16,7 @@ GemAuditor.New = function()
 		local stats = GetItemStats(itemLink) or {0}
 				
 		for info, number in pairs(stats) do
-			if (string.find(info, "EMPTY")) then
+			if (string.find(info, "SOCKET")) then
 				socketsNumber = socketsNumber + number
 			end
 		end

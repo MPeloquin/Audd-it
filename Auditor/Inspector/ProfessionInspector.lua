@@ -4,11 +4,11 @@ ProfessionInspector.New = function()
 	
   self.HasProfession = function(professionId)
     prof1Id, prof2Id = GetProfessions()		
+    
+		prof1 = select(7, GetProfessionInfo(prof1Id or -1))
+		prof2 = select(7, GetProfessionInfo(prof2Id or -1))
 		
     
-		prof1 = select(7, GetProfessionInfo(prof1Id or -1))	or -1
-		prof2 = select(7, GetProfessionInfo(prof2Id or -1)) or -1
-		
 		if (prof1 == professionId or prof2 == professionId) then
 			return true;
 		end
@@ -16,8 +16,12 @@ ProfessionInspector.New = function()
   end
   
 	self.HasJewelCrafting = function()	
-    self.HasProfession(755)
+    return self.HasProfession(755)
 	end	
+  
+  self.HasBlackSmithing = function()
+    return self.HasProfession(164)
+  end
 	
 	return self
 end

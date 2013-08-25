@@ -20,18 +20,14 @@ Auditor.New = function()
 	
 	self.AuditItem = function(item)
 		local itemId = GetInventorySlotInfo(item)
-  
-    if ((item == "WaistSlot")) then
-      self.BeltBuckleAuditor.Audit()
-    else
-      self.GemAuditor.Audit(itemId)		
-    end
     
+    self.GemAuditor.Audit(itemId)	    
 		self.EnchantAuditor.Audit(itemId)    		
 	end
 	
 	self.AuditCharacter = function()
     self.ProfessionAuditor.Audit()
+    self.BeltBuckleAuditor.Audit()
 	end
 	
 	return self

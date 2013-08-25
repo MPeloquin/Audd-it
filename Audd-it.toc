@@ -15,8 +15,11 @@ Auditor\GemAuditor.lua
 Auditor\EnchantAuditor.lua
 Auditor\BeltBuckleAuditor.lua
 
-Auditor\Profession\ProfessionInspector.lua
+Auditor\Inspector\ProfessionInspector.lua
+Auditor\ExtraGemAuditor.lua
+
 Auditor\Profession\JewelCraftingAuditor.lua
+Auditor\Profession\BlacksmithingAuditor.lua
 Auditor\Profession\ProfessionAuditor.lua
 
 UI\Frames.lua
