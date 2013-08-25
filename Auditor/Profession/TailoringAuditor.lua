@@ -13,7 +13,7 @@ TailoringAuditor.New = function()
 			return
 		end
     
-    self.ExtraEnchantAuditor.Audit("BackSlot", self.TailoringEnchants, "Tailoring: Missing enchant")
+    self.ExtraEnchantAuditor.Audit("BackSlot", self.TailoringEnchants550, "Tailoring: Missing enchant")
   end
   
   return self
