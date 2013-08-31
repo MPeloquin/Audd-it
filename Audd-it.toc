@@ -16,6 +16,7 @@ Auditor\EnchantAuditor.lua
 Auditor\BeltBuckleAuditor.lua
 
 Auditor\Inspector\ProfessionInspector.lua
+Auditor\Inspector\ItemLevelInspector.lua
 Auditor\ExtraGemAuditor.lua
 Auditor\ExtraEnchantAuditor.lua
 

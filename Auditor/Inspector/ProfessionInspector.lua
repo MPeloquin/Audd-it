@@ -3,10 +3,10 @@ ProfessionInspector.New = function()
 	local self = {}
 	
   self.GetProfessionLevel = function(professionId)
-    prof1Id, prof2Id = GetProfessions()		
+    local prof1Id, prof2Id = GetProfessions()		
     
-    _,_,prof1level, _, _, _, prof1 = GetProfessionInfo(prof1Id or -1)
-    _,_,prof2level, _, _, _, prof2 = GetProfessionInfo(prof2Id or -1)
+    local _,_,prof1level, _, _, _, prof1 = GetProfessionInfo(prof1Id or -1)
+    local _,_,prof2level, _, _, _, prof2 = GetProfessionInfo(prof2Id or -1)
 
     if (prof1 == professionId) then
 			return prof1level

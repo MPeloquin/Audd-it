@@ -11,14 +11,14 @@ EnchantingAuditor.New = function()
   self.Audit = function()
     local enchantingLevel = ProfessionInspector.New().GetEnchantingLevel()
     
-    if(enchantingLevel == -1) then
+    if (enchantingLevel == -1) then
 			return
 		end
     
     local tableToUse = {}
     if (enchantingLevel >= 400 and enchantingLevel < 475) then
       tableToUse = self.RingEnchants400
-    elseif(enchantingLevel < 550) then
+    elseif (enchantingLevel < 550) then
       tableToUse = self.RingEnchants475
     else
       tableToUse = self.RingEnchants550
