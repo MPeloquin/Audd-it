@@ -8,13 +8,18 @@ EngineeringAuditor.New = function()
   self.Audit = function()
     local engineeringLevel = ProfessionInspector.New().GetEngineeringLevel()
 
-    if(engineeringLevel == -1) then
+    if (engineeringLevel < 380) then
 			return
 		end    
 
+    self.AuditTinker(GetInventorySlotInfo("BackSlot"))      
     self.AuditTinker(GetInventorySlotInfo("WaistSlot"))
+    
+    if (engineeringLevel < 400) then
+			return
+		end  
+    
     self.AuditTinker(GetInventorySlotInfo("HandsSlot"))
-    self.AuditTinker(GetInventorySlotInfo("BackSlot"))    
   end
   
   self.AuditTinker = function(itemId)    
