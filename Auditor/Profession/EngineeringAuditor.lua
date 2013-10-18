@@ -12,17 +12,18 @@ EngineeringAuditor.New = function()
 			return
 		end    
 
-    self.AuditTinker(GetInventorySlotInfo("BackSlot"))      
-    self.AuditTinker(GetInventorySlotInfo("WaistSlot"))
+    self.AuditTinker("BackSlot")      
+    self.AuditTinker("WaistSlot")
     
     if (engineeringLevel < 400) then
 			return
 		end  
     
-    self.AuditTinker(GetInventorySlotInfo("HandsSlot"))
+    self.AuditTinker("HandsSlot")
   end
   
-  self.AuditTinker = function(itemId)    
+  self.AuditTinker = function(slotName)  
+    local itemId = GetInventorySlotInfo(slotName)
     local itemLink = GetInventoryItemLink("player", itemId)
     
     local tinkerName = GetItemSpell(itemLink)
