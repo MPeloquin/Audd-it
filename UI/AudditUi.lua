@@ -4,26 +4,27 @@ AudditUi.New = function()
 	self.ItemFrame = ItemFrame.New()	
 	
 	self.Show = function()	
-		self.ShowItemsWarnings()
+		self.ShowItemsFrames()
 	end
 	
   self.CreateIfNeeded = function()
     if(#frames == 0) then
+      
       for id, itemInfo in pairs(items) do
-        createdFrame = self.ItemFrame.Create(itemInfo)
+        local createdFrame = self.ItemFrame.Create(itemInfo)
         table.insert(frames, {frame = createdFrame, itemId = id})
       end
+      
     end
   end
   
-	self.ShowItemsWarnings = function()
+	self.ShowItemsFrames = function()
 		for _, frameInfo in pairs(frames) do      
 			if ( gearWarnings.HasWarnings(frameInfo.itemId) ) then
 				self.ItemFrame.ShowFrame(frameInfo.frame, frameInfo.itemId)				
 			else
         self.ItemFrame.HideFrame(frameInfo.frame)
-			end
-      
+			end      
 		end	
 	end	
 
