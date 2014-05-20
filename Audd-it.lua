@@ -1,15 +1,15 @@
 local Auddit = CreateFrame('Frame')
+local auditor = Auditor.New()
+local ui = AudditUi.New()
+gearWarnings = GearWarnings.New()
 
 function Auddit:Execute()	
-	gearWarnings = GearWarnings.New()
-	
-	local auditor = Auditor.New()
-	local ui = AudditUi.New()
-  
-	auditor.Audit()  
-  
-  ui.CreateIfNeeded()
-	ui.Show()
+    gearWarnings.Reset()
+
+    auditor.Audit()  
+    
+    ui.CreateIfNeeded()
+    ui.Show()
 end 
 
 Auddit:SetScript('OnEvent', Auddit.Execute)

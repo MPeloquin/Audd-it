@@ -48,7 +48,9 @@ GearWarnings.New = function()
 		return #{self.warnings[itemId]} > 0
 	end	
   
+  self.Reset = function()
+    self.warnings = {}
+  end
+  
 	return self
 end
-
-gearWarnings = GearWarnings.New()
