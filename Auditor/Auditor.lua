@@ -8,9 +8,7 @@ Auditor.New = function()
 	
 	self.ProfessionAuditor = ProfessionAuditor.New()
 	
-  -- TODO Add all the remaining auditors
-  
-	self.Audit = function()
+ 	self.Audit = function()
 		for itemId, itemInfo in pairs(items) do
         self.AuditItem(itemInfo.name)
 		end
@@ -26,7 +24,7 @@ Auditor.New = function()
 	end
 	
 	self.AuditCharacter = function()
-    self.ProfessionAuditor.Audit()
+    --self.ProfessionAuditor.Audit()
     self.BeltBuckleAuditor.Audit()
 	end
 	
